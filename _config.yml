@@ -1,0 +1,25 @@
+# Disable Jekyll processing for HTML files
+include:
+  - "*.html"
+  - "assets/**/*"
+title: "AI Technology Insights"
+description: "Latest AI trends, machine learning insights, and artificial intelligence developments"
+baseurl: ""
+url: "https://technology.eevoke.net"
+theme: null
+
+# Build settings
+markdown: kramdown
+permalink: pretty
+
+# Custom variables
+author: "AI Research Team"
+affiliate_programs: ["Listnr.ai", "Getreditus.com"]
+
+# Site configuration
+timezone: America/New_York
+future: false
+
+# Plugins (if using Jekyll)
+plugins:
+  - jekyll-feed
