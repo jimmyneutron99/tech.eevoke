@@ -180,3 +180,55 @@ function addAIGlitchEffects() {
 
 // Initialize glitch effects
 document.addEventListener('DOMContentLoaded', addAIGlitchEffects);
+    // Contact form success message
+    window.addEventListener('DOMContentLoaded', function() {
+        const urlParams = new URLSearchParams(window.location.search);
+        if (urlParams.get('success') === 'true') {
+            // Create success message
+            const successMsg = document.createElement('div');
+            successMsg.style.cssText = `
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+                color: white;
+                padding: 20px 30px;
+                border-radius: 12px;
+                box-shadow: 0 10px 30px rgba(0, 243, 255, 0.3);
+                z-index: 9999;
+                font-size: 16px;
+                animation: slideIn 0.5s ease-out;
+            `;
+            successMsg.innerHTML = `
+                <strong>✅ Message Sent!</strong><br>
+                Thank you for contacting Tech.eevoke. We'll respond to your inquiry at <strong>tech.eevoke@gmail.com</strong> soon.
+            `;
+            document.body.appendChild(successMsg);
+
+            // Add animation
+            const style = document.createElement('style');
+            style.textContent = `
+                @keyframes slideIn {
+                    from {
+                        transform: translateX(400px);
+                        opacity: 0;
+                    }
+                    to {
+                        transform: translateX(0);
+                        opacity: 1;
+                    }
+                }
+            `;
+            document.head.appendChild(style);
+
+            // Remove message after 8 seconds
+            setTimeout(function() {
+                successMsg.style.animation = 'slideIn 0.5s ease-out reverse';
+                setTimeout(function() {
+                    successMsg.remove();
+                    // Clean URL
+                    window.history.replaceState({}, document.title, window.location.pathname);
+                }, 500);
+            }, 8000);
+        }
+    });

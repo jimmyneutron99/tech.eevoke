@@ -357,7 +357,7 @@
             Artificial Intelligence Solutions
           </p>
           <p class="contacts__info">
-    Email: <a href="mailto:admin@eevoke.net" class="contacts__info-link">admin@eevoke.net</a>
+    Email: <a href="mailto:tech.eevoke@gmail.com" class="contacts__info-link">tech.eevoke@gmail.com</a>
 </p>
           <p class="contacts__info">
             Focus: <span class="contacts--light">AI Tools, Machine Learning, Technology Trends</span>
@@ -365,34 +365,40 @@
         </div>
       </div>
       <div class="col-md-6">
-        <form id="contact" class="form">
+        <form action="https://formsubmit.co/tech.eevoke@gmail.com" method="POST" class="form">
+          <!-- FormSubmit Configuration -->
+          <input type="hidden" name="_subject" value="New Contact Form Submission from Tech.eevoke">
+          <input type="hidden" name="_captcha" value="false">
+          <input type="hidden" name="_template" value="table">
+          <input type="hidden" name="_next" value="https://jimmyneutron99.github.io/tech.eevoke/index.html?success=true">
+          
           <div class="form-group">
-            <select class="form__field form__select">
-              <option selected value>Choose topic*</option>
-              <option value=1>AI Tool Recommendations</option>
-              <option value=2>Machine Learning Consulting</option>
-              <option value=3>Technical Support</option>
-              <option value=4>Partnership Opportunities</option>
+            <select name="topic" class="form__field form__select" required>
+              <option selected value="">Choose topic*</option>
+              <option value="AI Tool Recommendations">AI Tool Recommendations</option>
+              <option value="Machine Learning Consulting">Machine Learning Consulting</option>
+              <option value="Technical Support">Technical Support</option>
+              <option value="Partnership Opportunities">Partnership Opportunities</option>
             </select>
           </div>
           <div class="form-group">
             <div class="form__field--half">
-              <input type="text" placeholder="Name*" class="form__field form__text">
+              <input type="text" name="name" placeholder="Name*" class="form__field form__text" required>
             </div>
             <div class="form__field--half">
-              <input type="text" placeholder="Company" class="form__field form__text">
+              <input type="text" name="company" placeholder="Company" class="form__field form__text">
             </div>
           </div>
           <div class="form-group">
             <div class="form__field--half">
-              <input type="email" placeholder="Email address*" class="form__field form__text">
+              <input type="email" name="email" placeholder="Email address*" class="form__field form__text" required>
             </div>
             <div class="form__field--half">
-              <input type="tel" placeholder="Phone number" class="form__field form__text">
+              <input type="tel" name="phone" placeholder="Phone number" class="form__field form__text">
             </div>
           </div>
           <div class="form-group">
-            <textarea type="text" placeholder="Your message about AI technology...*" class="form__field form__textarea"></textarea>
+            <textarea name="message" placeholder="Your message about AI technology...*" class="form__field form__textarea" required></textarea>
             <button class="btn btn--up btn--width" type="submit">Submit</button>
           </div>
         </form>
