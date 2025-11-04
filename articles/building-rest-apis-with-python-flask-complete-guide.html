@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="shortcut icon" type="image/x-icon" href="https://image.ibb.co/fOur3b/favicon.png"/>
+  <meta name="theme-color" content="#1885ed">
+  
+  <meta name="description" content="Learn how to build REST APIs with Python Flask. Complete guide with code examples for beginners and advanced developers.">
+  
+  
+  <title>Building REST APIs with Python Flask - Complete Guide - Tech.eevoke</title>
+  <!-- Bootstrap CSS -->
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="../assets/css/modern-2025.css">
+</head>
+
+<body>
+<header class="header">
+  <div class="container header__container">
+    <div class="header__logo">
+      <span class="eevoke-logo">E</span> 
+      <h1 class="header__title">Tech<span class="header__light">.eevoke</span></h1>
+    </div> 
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+  
+    <div class="header__menu">
+  <nav id="navbar" class="header__nav collapse">
+    <ul class="header__elenco">
+      <li class="header__el"><a href="index.html" class="header__link">Home</a></li>
+      <li class="header__el"><a href="../index.html#ai-tools" class="header__link">AI Tools</a></li>
+      <li class="header__el"><a href="../index.html#case-studies" class="header__link">Case Studies</a></li>
+      <li class="header__el"><a href="index.html" class="header__link">Articles</a></li>
+      <li class="header__el"><a href="../index.html#contact" class="header__link">Contact</a></li>
+      <li class="header__el header__el--blue"><a href="#newsletter" class="btn btn--white">Newsletter →</a></li>
+    </ul>
+  </nav>
+</div>
+  </div>
+</header>
+
+<div class="sect sect--padding-top">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <article class="article-content">
+          <div class="article-header">
+            <h1 class="article-title">Building REST APIs with Python Flask - Complete Guide</h1>
+            <div class="article-meta">
+              <span class="article-category">ai-development</span>
+               • <span class="article-author">by Tech.eevoke AI</span>
+               • <span class="article-date">2025-11-04T01:59:46.498893</span>
+               • <span class="article-read-time">8</span>
+            </div>
+            
+            <img src="https://source.unsplash.com/1200x800/?programming,building,rest,technology,professional" alt="Building REST APIs with Python Flask - Complete Guide" class="article-featured-img">
+            
+          </div>
+
+          <div class="article-body">
+            <h1 id="building-rest-apis-with-python-flask">Building REST APIs with Python Flask</h1>
+<p>Flask is a lightweight Python web framework perfect for building APIs quickly.</p>
+<h2 id="setting-up-flask">Setting Up Flask</h2>
+<p>First, install Flask using pip:</p>
+<pre class="codehilite"><code class="language-python">pip install flask
+</code></pre>
+
+<h2 id="creating-a-simple-api">Creating a Simple API</h2>
+<p>Here&rsquo;s a basic Flask application with a REST endpoint:</p>
+<pre class="codehilite"><code class="language-python">from flask import Flask, jsonify, request
+
+app = Flask(__name__)
+
+@app.route('/api/users', methods=['GET'])
+def get_users():
+    users = [
+        {'id': 1, 'name': 'Alice', 'email': 'alice@example.com'},
+        {'id': 2, 'name': 'Bob', 'email': 'bob@example.com'}
+    ]
+    return jsonify(users)
+
+@app.route('/api/users', methods=['POST'])
+def create_user():
+    data = request.get_json()
+    new_user = {
+        'id': len(users) + 1,
+        'name': data['name'],
+        'email': data['email']
+    }
+    return jsonify(new_user), 201
+
+if __name__ == '__main__':
+    app.run(debug=True, port=5000)
+</code></pre>
+
+<h2 id="adding-authentication">Adding Authentication</h2>
+<p>For production APIs, add JWT authentication:</p>
+<pre class="codehilite"><code class="language-python">from flask_jwt_extended import JWTManager, create_access_token, jwt_required
+
+app.config['JWT_SECRET_KEY'] = 'your-secret-key'
+jwt = JWTManager(app)
+
+@app.route('/api/login', methods=['POST'])
+def login():
+    username = request.json.get('username')
+    password = request.json.get('password')
+
+    # Validate credentials (simplified)
+    if username == 'admin' and password == 'secret':
+        access_token = create_access_token(identity=username)
+        return jsonify(access_token=access_token)
+
+    return jsonify({'error': 'Invalid credentials'}), 401
+
+@app.route('/api/protected', methods=['GET'])
+@jwt_required()
+def protected():
+    return jsonify({'message': 'This is a protected route'})
+</code></pre>
+
+<h2 id="testing-with-curl">Testing with cURL</h2>
+<p>Test your API endpoints using the <code>curl</code> command:</p>
+<pre class="codehilite"><code class="language-bash"># GET request
+curl http://localhost:5000/api/users
+
+# POST request
+curl -X POST http://localhost:5000/api/users \
+  -H &quot;Content-Type: application/json&quot; \
+  -d '{&quot;name&quot;:&quot;Charlie&quot;,&quot;email&quot;:&quot;charlie@example.com&quot;}'
+</code></pre>
+
+<h2 id="database-integration">Database Integration</h2>
+<p>Connect Flask to PostgreSQL using SQLAlchemy:</p>
+<pre class="codehilite"><code class="language-python">from flask_sqlalchemy import SQLAlchemy
+
+app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://user:pass@localhost/dbname'
+db = SQLAlchemy(app)
+
+class User(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(80), nullable=False)
+    email = db.Column(db.String(120), unique=True, nullable=False)
+
+    def to_dict(self):
+        return {
+            'id': self.id,
+            'name': self.name,
+            'email': self.email
+        }
+
+# Create tables
+with app.app_context():
+    db.create_all()
+</code></pre>
+
+<h2 id="conclusion">Conclusion</h2>
+<p>Flask makes it easy to build REST APIs in Python. Use these code examples as a starting point for your next project!</p>
+
+            
+            <div class="article-tags">
+              
+              <span class="tag">python</span>
+              
+              <span class="tag">flask</span>
+              
+              <span class="tag">rest-api</span>
+              
+              <span class="tag">web-development</span>
+              
+            </div>
+            
+          </div>
+        </article>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer class="footer">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-2 col-xs-6">
+        <span class="eevoke-logo">E</span>
+        <h1 class="footer__title">Tech<span class="footer__light">.eevoke</span></h1>
+      </div>
+      <div class="col-md-10 col-xs-6">
+        <div class="footer__social">
+          <!-- Social links same as main page -->
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <p style="color: #8198ae; font-size: 12px; text-align: center; margin-top: 20px; padding-top: 20px; border-top: 1px solid #2a3a4f;">
+          <strong>Affiliate Disclosure:</strong> This site contains affiliate links to AI tools and services. We may earn commissions from qualifying purchases through our recommendations. 
+          <a href="/affiliate-disclosure" style="color: #3a9fff;">Learn more</a> | 
+          <a href="/privacy-policy" style="color: #3a9fff;">Privacy Policy</a> | 
+          <a href="/terms" style="color: #3a9fff;">Terms of Service</a>
+          <br>© 2025 Tech.eevoke. All rights reserved.
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="../assets/js/interactions.js"></script>
+</body>
+</html>

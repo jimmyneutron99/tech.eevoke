@@ -1439,3 +1439,89 @@ body{
       0 0 60px rgba(138, 58, 255, 0.2);
   }
 }
+
+/* ===================================
+   Code Block Styling
+   =================================== */
+
+/* Code block container - supports both .code-block and .codehilite */
+.code-block,
+.codehilite {
+  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+  border: 1px solid rgba(0, 243, 255, 0.2);
+  border-radius: 8px;
+  padding: 20px;
+  margin: 20px 0;
+  overflow-x: auto;
+  box-shadow: 
+    0 4px 6px rgba(0, 0, 0, 0.3),
+    0 0 20px rgba(138, 58, 255, 0.1);
+  position: relative;
+}
+
+.code-block::before,
+.codehilite::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, #00f3ff 0%, #8a3aff 100%);
+  border-radius: 8px 8px 0 0;
+}
+
+/* Code element styling */
+.code-block code,
+.codehilite code {
+  display: block;
+  color: #00f3ff;
+  font-family: 'Courier New', Consolas, Monaco, monospace;
+  font-size: 14px;
+  line-height: 1.6;
+  white-space: pre;
+  text-shadow: 0 0 10px rgba(0, 243, 255, 0.3);
+}
+
+/* Inline code styling */
+code {
+  background: rgba(0, 243, 255, 0.1);
+  color: #00f3ff;
+  padding: 2px 6px;
+  border-radius: 3px;
+  font-family: 'Courier New', Consolas, Monaco, monospace;
+  font-size: 0.9em;
+  border: 1px solid rgba(0, 243, 255, 0.2);
+}
+
+/* Code block scrollbar styling */
+.code-block::-webkit-scrollbar {
+  height: 8px;
+}
+
+.code-block::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 4px;
+}
+
+.code-block::-webkit-scrollbar-thumb {
+  background: linear-gradient(90deg, #00f3ff 0%, #8a3aff 100%);
+  border-radius: 4px;
+}
+
+.code-block::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(90deg, #8a3aff 0%, #00f3ff 100%);
+}
+
+/* Language indicator - supports both .code-block and .codehilite */
+.code-block code[class*="language-"]::before,
+.codehilite code[class*="language-"]::before {
+  content: attr(class);
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 11px;
+  color: rgba(0, 243, 255, 0.5);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
