@@ -1453,6 +1453,7 @@ body{
   padding: 20px;
   margin: 20px 0;
   overflow-x: auto;
+  max-width: 100%;
   box-shadow: 
     0 4px 6px rgba(0, 0, 0, 0.3),
     0 0 20px rgba(138, 58, 255, 0.1);
@@ -1477,9 +1478,11 @@ body{
   display: block;
   color: #00f3ff;
   font-family: 'Courier New', Consolas, Monaco, monospace;
-  font-size: 14px;
-  line-height: 1.6;
-  white-space: pre;
+  font-size: 13px;
+  line-height: 1.5;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
   text-shadow: 0 0 10px rgba(0, 243, 255, 0.3);
 }
 
@@ -1524,4 +1527,22 @@ code {
   color: rgba(0, 243, 255, 0.5);
   text-transform: uppercase;
   letter-spacing: 1px;
+}
+
+/* Code snippet section wrapper */
+.code-snippet-section {
+  margin: 40px 0;
+  padding: 0;
+}
+
+.code-snippet-section h3 {
+  color: var(--neon-cyan);
+  font-size: 1.3em;
+  margin-bottom: 15px;
+  font-weight: 600;
+  text-shadow: 0 0 15px rgba(0, 243, 255, 0.3);
+}
+
+.code-snippet-section .code-block {
+  margin-top: 10px;
 }

@@ -51,3 +51,6 @@ dnspython>=2.3.0
 # Optional: For news trends
 newsapi-python>=0.2.7
 feedparser>=6.0.0
+
+# Templating
+Jinja2>=3.1.2
